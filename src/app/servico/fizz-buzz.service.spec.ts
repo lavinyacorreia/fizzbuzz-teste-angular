@@ -26,4 +26,16 @@ describe('FizzBuzzService', () => {
     expect(fizzBuzz[2]).toBe('Fizz');
     expect(fizzBuzz[5]).toBe('Fizz');
   });
+
+  it('Deve retornar Buzz para múltiplos de 5.', () => {
+    const fizzBuzz = service.gerar(30);
+    expect(fizzBuzz[4]).toBe('Buzz');
+    expect(fizzBuzz[9]).toBe('Buzz');
+  });
+
+  it('Deve retornar o número correto de elementos na lista.', () => {
+    const fizzBuzz = service.gerar(15);
+    expect(fizzBuzz.length).toBe(15);
+  });
+
 });

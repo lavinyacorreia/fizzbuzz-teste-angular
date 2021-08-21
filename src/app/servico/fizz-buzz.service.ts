@@ -10,8 +10,14 @@ export class FizzBuzzService {
   gerar(limite: number): string[] {
     const fizzBuzz = [];
     for (let i = 0; i<limite; i++){
-      if((i+1) % 3 ===0){
+      if((i+1) % 15 === 0){
+        fizzBuzz.push('FizzBuzz');
+      }      
+      else if((i+1) % 3 === 0){
         fizzBuzz.push('Fizz');
+      }
+      else if((i+1) % 5 === 0){
+        fizzBuzz.push('Buzz');
       }
       else{
         fizzBuzz.push((i+1).toString());
