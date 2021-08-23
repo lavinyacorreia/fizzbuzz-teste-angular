@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { FizzBuzzComponent } from './componentes/fizz-buzz/fizz-buzz.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        FizzBuzzComponent
       ],
     }).compileComponents();
   });
