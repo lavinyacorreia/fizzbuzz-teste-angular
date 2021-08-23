@@ -1,56 +1,49 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RetornoPipe } from 'src/app/filtros/retorno.pipe';
+import { FizzBuzzComponent } from '../componentes/fizz-buzz/fizz-buzz.component';
 
-import { FizzBuzzService } from './fizz-buzz.service';
 
-describe('FizzBuzzService', () => {
-  let service: FizzBuzzService;
+describe('FizzBuzzComponent', () => {
+  let component: FizzBuzzComponent;
+  let fixture: ComponentFixture<FizzBuzzComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ FizzBuzzComponent, RetornoPipe ]
+    })
+    .compileComponents();
+  });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(FizzBuzzService);
+    fixture = TestBed.createComponent(FizzBuzzComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('deve retornar números para os primeiros elementos.', () => {
-    const fizzBuzz: string[] = service.gerar(10);
-    expect(fizzBuzz[0]).toBe('1');
-    expect(fizzBuzz[1]).toBe('2');
-  });
+  it('deve gerar os primeiros 20 resultados para o FizzBuzz', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    const limiteInput: HTMLInputElement = element.querySelector('#limite')!;
+    const btnGerar: HTMLButtonElement = element.querySelector('#btnGerar')!;
+    
+    limiteInput.value = '20';
+    limiteInput.dispatchEvent(new Event('keyup'));
+    fixture.detectChanges();
+    btnGerar.click();
+    fixture.detectChanges();
 
-  it('deve retornar Fizz para múltiplos de 3.', () => {
-    const fizzBuzz = service.gerar(10);
-    expect(fizzBuzz[2]).toBe('Fizz');
-    expect(fizzBuzz[5]).toBe('Fizz');
-  });
-  
-  it('deve retornar Buzz para múltiplos de 5.', () => {
-    const fizzBuzz = service.gerar(10);
-    expect(fizzBuzz[4]).toBe('Buzz');
-    expect(fizzBuzz[9]).toBe('Buzz');
-  });
+    const resultado: NodeListOf<HTMLLIElement> = element.querySelectorAll('li');
+    const tituloResultado: HTMLHeadingElement = element.querySelector('.resultado')!;
 
-  it('deve retornar FizzBuzz para múltiplos de 15.', () => {
-    const fizzBuzz = service.gerar(30);
-    expect(fizzBuzz[14]).toBe('FizzBuzz');
-    expect(fizzBuzz[29]).toBe('FizzBuzz');
-  });
-
-  it('deve retornar o número correto de elementos na lista', () => {
-    const fizzBuzz = service.gerar(15);
-    expect(fizzBuzz.length).toBe(15);
-  });
-
-  it('deve retornar uma lista vazia para limite = 0', () => {
-    const fizzBuzz = service.gerar(0);
-    expect(fizzBuzz.length).toBe(0);
-  });
-
-  it('deve retornar uma lista vazia para limite negativo', () => {
-    const fizzBuzz = service.gerar(-10);
-    expect(fizzBuzz.length).toBe(0);
+    expect(resultado.length).toBe(20);
+    expect(resultado.item(0).innerHTML).toContain('1');
+    expect(resultado.item(2).innerHTML).toContain('Fizz');
+    expect(resultado.item(4).innerHTML).toContain('Buzz');
+    expect(resultado.item(14).innerHTML).toContain('FizzBuzz');
+    expect(tituloResultado.innerHTML).toContain('Exibindo os primeiros 20 resultados.');
   });
 
 });

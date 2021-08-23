@@ -16,13 +16,17 @@
       (keyup)="setLimite($event)"
       value="15"
       numero
+
     />
   </div>
   <div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3" (click)="gerar($event)">Gerar</button>
+    <button type="submit" 
+    class="btn btn-primary mb-3" 
+    (click)="gerar($event)" 
+    id="btnGerar">Gerar</button>
   </div>
 </form>
-<h2 *ngIf="resultado.length > 0">{{limite | retorno}}</h2>
+<h2 *ngIf="resultado.length > 0" class="resultado">{{limite | retorno}}</h2>
 <ul>
   <li *ngFor="let linha of resultado">{{linha}}</li>
 </ul>
