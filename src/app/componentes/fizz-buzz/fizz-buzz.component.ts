@@ -18,6 +18,9 @@ export class FizzBuzzComponent implements OnInit {
 
   setLimite($event: any){
     this.limite = $event.target.value;
+    if ($event.keyCode != 13){
+      this.resultado = [];
+    }
   }
 
   gerar($event: any){
